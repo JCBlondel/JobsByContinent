@@ -8,7 +8,10 @@ require 'jobs_by_continent'
 
 require 'tools/store'
 require 'tools/store_access'
-require 'tools/files_checker'
+
+require 'checks/file_check'
+require 'checks/professions_check'
+require 'checks/jobs_check'
 
 require 'processors/professions_processor'
 require 'processors/professions/professions_chunk_worker'

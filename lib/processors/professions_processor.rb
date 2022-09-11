@@ -1,0 +1,2 @@
+class ProfessionProcessor
+end

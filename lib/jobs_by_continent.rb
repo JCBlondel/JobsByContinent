@@ -13,9 +13,12 @@ class JobsByContinent
   private
 
   def init_store
+    @store = Store.new
   end
 
   def check_csv_files
+    ProfessionsCheck.new(store).perform
+    JobsCheck.new(store).perform
   end
 
   def process_professions
