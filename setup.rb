@@ -15,8 +15,6 @@ require 'checks/jobs_check'
 
 require 'processors/professions_processor'
 require 'processors/professions/professions_chunk_worker'
-require 'processors/professions/professions_builder'
-require 'processors/professions/categories_builder'
 require 'processors/professions/jobs_by_continent_builder'
 
 require 'processors/jobs_processor'

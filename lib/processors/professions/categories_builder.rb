@@ -1,2 +1,0 @@
-class CategoriesBuilder
-end

@@ -22,6 +22,7 @@ class JobsByContinent
   end
 
   def process_professions
+    ProfessionsProcessor.new(store).perform
   end
 
   def process_jobs
