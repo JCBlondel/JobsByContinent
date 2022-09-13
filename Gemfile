@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'parallel'
+gem 'geokit'
 gem 'pry'
 gem 'smarter_csv'

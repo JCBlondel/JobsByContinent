@@ -1,4 +1,4 @@
-require 'parallel'
+require 'geokit'
 require 'pry'
 require 'smarter_csv'
 
@@ -13,6 +13,9 @@ require 'checks/file_check'
 require 'checks/professions_check'
 require 'checks/jobs_check'
 
+require 'geocoding/continent_from_coordinates'
+require 'geocoding/continents_as_polygons'
+
 require 'processors/professions_processor'
 require 'processors/professions/professions_chunk_worker'
 require 'processors/professions/jobs_by_continent_builder'
@@ -25,4 +28,3 @@ require 'processors/jobs/jobs_by_continent_incrementor'
 
 require 'outputs/formatter'
 require 'outputs/printer'
-
