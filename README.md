@@ -33,6 +33,7 @@ To launch this script, clone this repository, go within it from a terminal and t
 
 ## Train of thoughts for test resolution
 
+### First approch
 In order to reach the goal of this test:
 - open csv files
 - iterate through chunks of professions' data:
@@ -45,3 +46,30 @@ In order to reach the goal of this test:
   - process it to get the matching category_name from stored professions from the id
   - increment the 'jobs_by_continent' from store with the given continent/category_name combination
 - display the jobs_by_continent nested hash in the term
+
+
+### Geocoding
+Instead of using a thrid party api solution
+along with [Geocoder](https://github.com/alexreisner/geocoder)
+to get every continent's name
+ending up with a static representation of continents with polygons.
+
+The "geocoding chokepoint" appears to be one of the most challenging
+part of this test because we need to guess the continent
+from lat/lon coordinates for each job
+facing 2 major problems:
+- [lookup services](https://github.com/alexreisner/geocoder/blob/master/README_API_GUIDE.md) have quotas and need registration for an API key
+- we want this script to be fast over 5k+ jobs
+  and talking about scalability (2nd question)
+  even while parallelizing: lookup services have rate limits
+
+Moreover, no convention seems to exist around continent's names.
+
+![](https://i.stack.imgur.com/m2fO5.png)
+
+So current solution is that every continent can have one or many polygons
+made from multiple points showing continents' borders.
+
+Inspired from [this post](https://stackoverflow.com/questions/13905646/get-the-continent-given-the-latitude-and-longitude).
+
+Using [Geokit](https://github.com/geokit/geokit) to manipulate polygons.
