@@ -14,7 +14,6 @@ RSpec.describe ProfessionsProcessor do
 
       expect { service.perform }
         .to change { store.professions }.from({}).to({17 => "Tech"})
-        .and change { store.categories }.from([]).to(["Tech"])
     end
   end
 end
