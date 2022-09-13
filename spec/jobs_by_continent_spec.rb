@@ -6,6 +6,7 @@ RSpec.describe JobsByContinent do
   let(:professions_check) { ProfessionsCheck.new(store) }
   let(:jobs_check) { JobsCheck.new(store) }
   let(:professions_processor) { ProfessionsProcessor.new(store) }
+  let(:jobs_processor) { JobsProcessor.new(store) }
 
   describe 'attributes' do
     it { is_expected.to(have_attr_reader(:store)) }
@@ -36,6 +37,14 @@ RSpec.describe JobsByContinent do
       service.perform
 
       expect(professions_processor).to have_received(:perform).exactly(1).time
+    end
+
+    it do
+      allow(JobsProcessor).to receive(:new).and_return(jobs_processor)
+      allow_any_instance_of(JobsProcessor).to receive(:perform)
+      service.perform
+
+      expect(jobs_processor).to have_received(:perform).exactly(1).time
     end
   end
 end

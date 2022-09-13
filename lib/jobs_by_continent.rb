@@ -26,6 +26,7 @@ class JobsByContinent
   end
 
   def process_jobs
+    JobsProcessor.new(store).perform
   end
 
   def display_results
