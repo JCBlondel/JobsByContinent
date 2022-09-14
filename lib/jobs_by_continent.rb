@@ -30,5 +30,7 @@ class JobsByContinent
   end
 
   def display_results
+    Formatter.new(store).perform
+    Printer.new(store).perform
   end
 end

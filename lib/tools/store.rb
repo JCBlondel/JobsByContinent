@@ -6,6 +6,7 @@ class Store
 
   attr_accessor :professions
   attr_accessor :jobs_by_continent
+  attr_accessor :formatted_output
 
   def initialize
     @professions_csv_file = professions_csv_file_path
@@ -15,6 +16,11 @@ class Store
 
     @professions = {}
     @jobs_by_continent = {}
+    @formatted_output = []
+  end
+
+  def unique_job_categories
+    professions.values.uniq
   end
 
   private

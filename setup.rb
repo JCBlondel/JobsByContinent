@@ -1,6 +1,7 @@
 require 'geokit'
 require 'pry'
 require 'smarter_csv'
+require 'terminal-table'
 
 $LOAD_PATH.unshift(File.expand_path(".", "lib"))
 
@@ -24,4 +25,7 @@ require 'processors/jobs/jobs_chunk_worker'
 require 'processors/jobs/stats_aggregator'
 
 require 'outputs/formatter'
+require 'outputs/formatters/header_builder'
+require 'outputs/formatters/total_row_builder'
+require 'outputs/formatters/continents_rows_builder'
 require 'outputs/printer'

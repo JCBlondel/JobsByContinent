@@ -12,6 +12,7 @@ RSpec.describe Store do
 
     it { is_expected.to(have_attr_accessor(:professions)) }
     it { is_expected.to(have_attr_accessor(:jobs_by_continent)) }
+    it { is_expected.to(have_attr_accessor(:formatted_output)) }
   end
 
   describe '#initialize' do
@@ -26,5 +27,6 @@ RSpec.describe Store do
 
     it { expect(store.professions).to match({}) }
     it { expect(store.jobs_by_continent).to match({}) }
+    it { expect(store.formatted_output).to match([]) }
   end
 end
