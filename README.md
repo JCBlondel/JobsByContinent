@@ -73,3 +73,32 @@ made from multiple points showing continents' borders.
 Inspired from [this post](https://stackoverflow.com/questions/13905646/get-the-continent-given-the-latitude-and-longitude).
 
 Using [Geokit](https://github.com/geokit/geokit) to manipulate polygons.
+
+### Display in term
+
+Using [terminal-table](https://github.com/tj/terminal-table) to display stats in the term
+
+
+### Question 2: Scalability
+
+From test instructions: "we have 100 000 000 job offers in our database, and 1000 new job offers per second"
+
+Well, it diserve a good discussion !
+
+For me it's like hand writing numbers on a [draw table](https://img.freepik.com/vecteurs-premium/chiffres-dessines-main-fleches-craie-tableau-noir_108905-154.jpg): You cannot be fast enough to write it all.
+A better approach would be to draw a stick '|' for each one, from a prisonner's perspective.
+
+You will need to split the load between multiple workers for this service, especialy if you plan to do more categorisation to jobs offers, such like 'country'.
+You can handle it with parallelization, in multiple threads, using background jobs and other tools.
+
+But you will end up with another problem writing the data while accessing it from outside. Such database like PostgreSQL will not let you enough time to pass a transaction at such an high rate.
+In order to store data faster (puting sticks), we could rely on a datastore solution like [Redis](https://developer.redis.com/explore/what-is-redis/).
+With a Redis datastore, we could output the count of the sticks by incrementing the right counter on a the service output.
+Meanwhile, to store and index results we could batch those ones in chunks, to a database like PostgreSQL through an asynchrone job triggered right after incrementing the Redis datastore.
+A job with a slower delay than 1000 requests per seconds.
+
+To output the stats in frontend dashboards, Redis counters would be the primary source of thruth.
+
+Another solution than Redis, would be using [Apache Kafka](https://kafka.apache.org/) that seems to handle those business cases.
+
+I guess that Elixir has some advantages compared to other languages to handle such problems like this.
