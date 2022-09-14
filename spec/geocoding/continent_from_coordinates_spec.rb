@@ -45,5 +45,9 @@ RSpec.describe ContinentFromCoordinates do
     it "is not inside one of the polygons" do
       expect(service.perform(lat: wellington[:lat], lon: wellington[:lon])).to eq("OCEANIA")
     end
+
+    it do
+      expect(service.perform(lat: nil, lon: nil)).to eq("UNKNOWN")
+    end
   end
 end

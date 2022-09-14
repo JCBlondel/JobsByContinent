@@ -1,18 +1,30 @@
-class JobsChunkWorker
+class JobsChunkWorker < StoreAccess
   attr_reader :worker_results
 
-  def initialize
+  def initialize(store)
+    super
+
     @worker_results = {}
   end
 
   def perform(jobs)
     jobs.each do |job|
-      # JobGeocoder -> get the continent
-      # CategoryMatcher -> get the matching category_name
-      #
-      # in worker_results -> category_name (key) increment value
+      continent = store.geocoder_service.perform(lat: job[:office_latitude], lon: job[:office_longitude])
+      category = store.professions[job[:profession_id]] || "Autre"
+
+      increment_job_category_by_continent(continent, category)
     end
 
     worker_results
+  end
+
+  private
+
+  def increment_job_category_by_continent(continent_key, category_key)
+    if worker_results[continent_key].nil?
+      worker_results[continent_key] = Hash.new(0)
+    end
+
+    worker_results[continent_key][category_key] += 1
   end
 end

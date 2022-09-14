@@ -6,6 +6,8 @@ class ContinentFromCoordinates
   end
 
   def perform(lat:, lon:)
+    return "UNKNOWN" if lat.nil? || lon.nil?
+
     location = Geokit::LatLng.new(lat, lon)
 
     continents.each do |continent_name, polygons|

@@ -9,8 +9,21 @@ RSpec.describe JobsProcessor do
     let(:store) { Store.new }
     let(:service) { described_class.new(store) }
 
-    xit do
-      allow(store).to receive(:jobs_csv_file).and_return('spec/fixtures/jobs.csv')
+    let(:expected_output) do
+      {
+        "AFRICA"=>{"Autre"=>9},
+        "ASIA"=>{"Autre"=>51},
+        "EUROPE"=>{"Autre"=>4795},
+        "NORTH AMERICA"=>{"Autre"=>157},
+        "OCEANIA"=>{"Autre"=>9},
+        "SOUTH AMERICA"=>{"Autre"=>5},
+        "UNKNOWN"=>{"Autre"=>43}
+      }
+    end
+
+    it do
+      expect { service.perform }
+        .to change { store.jobs_by_continent }.from({}).to(expected_output)
     end
   end
 end

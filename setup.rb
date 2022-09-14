@@ -21,6 +21,7 @@ require 'processors/professions/professions_chunk_worker'
 
 require 'processors/jobs_processor'
 require 'processors/jobs/jobs_chunk_worker'
+require 'processors/jobs/stats_aggregator'
 
 require 'outputs/formatter'
 require 'outputs/printer'

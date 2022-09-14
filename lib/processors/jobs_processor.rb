@@ -7,7 +7,9 @@ class JobsProcessor < StoreAccess
 
   def iterate_through_jobs
     jobs_chunks.each do |jobs|
-      worker_results = JobsChunkWorker.new.perform(jobs)
+      worker_results = JobsChunkWorker.new(store).perform(jobs)
+
+      StatsAggregator.new.perform(store.jobs_by_continent, worker_results)
     end
   end
 
